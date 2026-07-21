@@ -58,4 +58,6 @@ func _do_spawn(egg_config):
 
 func _on_egg_destroyed(egg: EggEntity):
     EconomyManager.add_coins(egg.egg_config.reward_coins)
+    AudioManager.play_sfx("res://assets/audio/explosion.wav")
+    AudioManager.play_sfx("res://assets/audio/coin.wav")
     egg.queue_free()

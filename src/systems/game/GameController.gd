@@ -3,7 +3,9 @@ extends Node
 @export var field: Node2D
 @export var spawner: Node
 @export var combat_system: Node
+@export var interaction: Control
 @export var ui_layer: CanvasLayer
+@export var game_ui: Control
 
 var current_level: LevelConfig
 var game_time: float = 0.0
@@ -20,7 +22,6 @@ const RESULT_PATH: String = "res://scenes/result.tscn"
 
 func _ready():
     process_mode = Node.PROCESS_MODE_ALWAYS
-    field.soldier_placed.connect(_on_soldier_placed)
 
     current_level = load(LEVEL_PATH)
     if current_level:
@@ -30,15 +31,25 @@ func _ready():
 func _start_level():
     if not current_level:
         return
+    AudioManager.play_music("res://assets Nikita/music/game.mp3")
     game_time = 0.0
     is_game_over = false
     is_paused = false
 
     EconomyManager.coins = current_level.starting_coins
     combat_system.setup(field)
+
+    var sell_global = game_ui.get_node("SellZone")
+    var sell_rect = Rect2(sell_global.global_position, sell_global.size)
+    interaction.setup(field, combat_system, sell_rect)
+
+    if game_ui.has_method("setup"):
+        game_ui.setup(interaction, field, current_level)
+
     spawner.setup(field, current_level.waves)
     LevelManager.load_level(current_level.id)
-    LevelManager.level_started.emit(current_level.id)
+
+    interaction.set_reserve(current_level.starting_reserves)
 
 
 func _process(delta):
@@ -51,22 +62,20 @@ func _process(delta):
     var time_left = max(0.0, current_level.time_limit - game_time)
     time_updated.emit(time_left)
 
-    if time_left <= 0.0 and field.get_egg_count() == 0:
+    if game_ui and game_ui.has_method("update_timer"):
+        game_ui.update_timer(time_left)
+
+    if field.get_egg_count() == 0 and spawner.get_pending_wave_count() == 0:
         _on_victory()
     elif time_left <= 0.0:
         _on_defeat()
-
-
-func _on_soldier_placed(side: int, slot: int):
-    var soldier_node = field.perimeter[side][slot]
-    if soldier_node is SoldierEntity:
-        combat_system.register_soldier(soldier_node)
 
 
 func _on_victory():
     is_game_over = true
     EconomyManager.add_crystals(current_level.crystal_reward)
     LevelManager.complete_level(true)
+    SaveManager.mark_dirty()
     GameManager.go_to_scene_with_data(RESULT_PATH, { "victory": true })
 
 

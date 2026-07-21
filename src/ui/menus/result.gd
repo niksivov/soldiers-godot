@@ -8,6 +8,11 @@ func _ready():
     is_victory = GameManager.last_result.get("victory", false)
     _crystals_earned = EconomyManager.crystals
 
+    if is_victory:
+        AudioManager.play_sfx("res://assets/audio/level_complete.wav")
+    else:
+        AudioManager.play_sfx("res://assets/audio/error.wav")
+
     var bg_path = "res://assets Nikita/backgrounds/bg_result.png"
     if is_victory and ResourceLoader.exists("res://assets Nikita/backgrounds/bg_menu.png"):
         bg_path = "res://assets Nikita/backgrounds/bg_menu.png"

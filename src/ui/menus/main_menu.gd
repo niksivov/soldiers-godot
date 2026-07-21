@@ -2,6 +2,7 @@ extends Node2D
 
 
 func _ready():
+    AudioManager.play_music("res://assets Nikita/music/menu.mp3")
     var bg = Sprite2D.new()
     var bg_path = "res://assets Nikita/backgrounds/bg_menu.png"
     if ResourceLoader.exists(bg_path):

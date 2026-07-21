@@ -6,13 +6,17 @@
 [ext_resource type="Script" path="res://src/systems/combat/CombatSystem.gd" id="4"]
 [ext_resource type="Texture2D" path="res://assets Nikita/icons/icon_timer.png" id="5"]
 [ext_resource type="Texture2D" path="res://assets Nikita/icons/icon_coin.png" id="6"]
+[ext_resource type="Script" path="res://src/systems/game/GameInteraction.gd" id="7"]
+[ext_resource type="Script" path="res://src/ui/hud/GameUI.gd" id="8"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1")
 field = NodePath("Field")
 spawner = NodePath("EggSpawner")
 combat_system = NodePath("CombatSystem")
+interaction = NodePath("GameInteraction")
 ui_layer = NodePath("UILayer")
+game_ui = NodePath("UILayer/GameUI")
 
 [node name="Field" type="Node2D" parent="."]
 script = ExtResource("2")
@@ -23,11 +27,27 @@ script = ExtResource("3")
 [node name="CombatSystem" type="Node" parent="."]
 script = ExtResource("4")
 
-[node name="UILayer" type="CanvasLayer" parent="."]
+[node name="GameInteraction" type="Control" parent="."]
+mouse_filter = 0
+layout_mode = 1
+anchors_preset = 15
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource("7")
+
+[node name="UILayer" type="CanvasLayer" parent=".""]
 
 [node name="GameUI" type="Control" parent="UILayer"]
+mouse_filter = 1
 layout_mode = 1
 anchors_preset = 0
+script = ExtResource("8")
+timer_label = NodePath("TopBar/TimerLabel")
+coin_label = NodePath("TopBar/CoinLabel")
+reserve_panel = NodePath("ReservePanel")
+sell_rect = NodePath("SellZone")
 
 [node name="TopBar" type="HBoxContainer" parent="UILayer/GameUI"]
 layout_mode = 2

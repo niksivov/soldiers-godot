@@ -48,6 +48,7 @@ func _process(delta):
         if fire_type:
             fire_type.execute(soldier, nearest.pos, field)
             soldier.set_meta("cooldown_timer", soldier.reload_time)
+            AudioManager.play_sfx("res://assets/audio/shoot.wav")
 
 
 func _get_fire_type(type_name: String):
