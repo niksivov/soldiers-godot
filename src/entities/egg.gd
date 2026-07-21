@@ -26,6 +26,11 @@ func _render():
         var path = "res://assets Nikita/eggs/egg_%02d.png" % id_num
         if ResourceLoader.exists(path):
             sprite.texture = load(path)
+    if sprite.texture:
+        var tex_size = sprite.texture.get_size()
+        if tex_size.x > 0 and tex_size.y > 0:
+            var s = Field.CELL_SIZE / max(tex_size.x, tex_size.y)
+            sprite.scale = Vector2(s, s)
     add_child(sprite)
 
     var bar = ColorRect.new()

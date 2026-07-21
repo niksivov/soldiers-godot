@@ -35,8 +35,8 @@ func _ready():
 
         _add_button("res://assets Nikita/buttons/button_play.png", Vector2(640, 450), _on_next_pressed)
     else:
-        _add_button("res://assets Nikita/buttons/button_retry.png", Vector2(540, 450), _on_retry_pressed)
-        _add_button("res://assets Nikita/buttons/button_back.png", Vector2(740, 450), _on_back_pressed)
+        _add_button("res://assets Nikita/buttons/button_retry.png", Vector2(640, 450), _on_retry_pressed)
+        _add_button("res://assets Nikita/buttons/button_back.png", Vector2(640, 540), _on_back_pressed)
 
 
 func _add_background(path: String):
@@ -59,7 +59,6 @@ func _add_button(path: String, pos: Vector2, callback: Callable):
 
 
 func _on_next_pressed():
-    AudioManager.play_sfx("res://assets/audio/click.wav")
     var current = GameManager.last_result.get("next_level", "level_01")
     var num = current.trim_prefix("level_").to_int()
     var next = "level_%02d" % [num + 1]
@@ -68,10 +67,8 @@ func _on_next_pressed():
 
 
 func _on_retry_pressed():
-    AudioManager.play_sfx("res://assets/audio/click.wav")
     GameManager.go_to_scene("res://scenes/game.tscn")
 
 
 func _on_back_pressed():
-    AudioManager.play_sfx("res://assets/audio/click.wav")
     GameManager.go_to_scene("res://scenes/level_map.tscn")

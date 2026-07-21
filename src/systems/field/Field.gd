@@ -43,6 +43,7 @@ func _render():
         for y in GRID_SIZE:
             var cell = Sprite2D.new()
             cell.texture = load("res://assets Nikita/cells/cell_empty.png")
+            _fit_sprite(cell)
             cell.position = Vector2((x + 1) * CELL_SIZE, (y + 1) * CELL_SIZE)
             add_child(cell)
             cell_sprites[x].append(cell)
@@ -54,6 +55,13 @@ func _render():
         _create_slot(Side.RIGHT, i, Vector2((GRID_SIZE + 1) * CELL_SIZE, (i + 1) * CELL_SIZE))
 
 
+func _fit_sprite(sprite: Sprite2D):
+    if sprite and sprite.texture:
+        var tex_size = sprite.texture.get_size()
+        if tex_size.x > 0 and tex_size.y > 0:
+            sprite.scale = Vector2(CELL_SIZE / tex_size.x, CELL_SIZE / tex_size.y)
+
+
 func _create_slot(side: int, index: int, pos: Vector2):
     var area = Area2D.new()
     area.name = "Slot_%s_%d" % [Side.keys()[side], index]
@@ -63,6 +71,7 @@ func _create_slot(side: int, index: int, pos: Vector2):
 
     var sprite = Sprite2D.new()
     sprite.texture = load("res://assets Nikita/cells/cell_field.png")
+    _fit_sprite(sprite)
     area.add_child(sprite)
 
     var collision = CollisionShape2D.new()

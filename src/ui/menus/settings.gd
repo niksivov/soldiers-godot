@@ -10,7 +10,7 @@ func _ready():
     label.scale = Vector2(2, 2)
     add_child(label)
 
-    _add_button("res://assets Nikita/buttons/button_back.png", Vector2(80, 650), _on_back_pressed)
+    _add_button("res://assets Nikita/buttons/button_back.png", Vector2(640, 650), _on_back_pressed)
 
 
 func _add_background(path: String):
@@ -33,5 +33,4 @@ func _add_button(path: String, pos: Vector2, callback: Callable):
 
 
 func _on_back_pressed():
-    AudioManager.play_sfx("res://assets/audio/click.wav")
     GameManager.go_to_scene("res://scenes/main_menu.tscn")

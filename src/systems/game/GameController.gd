@@ -72,6 +72,11 @@ func _start_level():
 
     interaction.set_reserve(current_level.starting_reserves)
 
+    var initial_time = current_level.time_limit
+    time_updated.emit(initial_time)
+    if game_ui and game_ui.has_method("update_timer"):
+        game_ui.update_timer(initial_time)
+
 
 func _process(delta):
     if is_paused or is_game_over:

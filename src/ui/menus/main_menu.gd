@@ -39,15 +39,12 @@ func _add_button(path: String, pos: Vector2, callback: Callable):
 
 
 func _on_play_pressed():
-    AudioManager.play_sfx("res://assets/audio/click.wav")
     GameManager.go_to_scene("res://scenes/level_map.tscn")
 
 
 func _on_shop_pressed():
-    AudioManager.play_sfx("res://assets/audio/click.wav")
     GameManager.go_to_scene("res://scenes/shop.tscn")
 
 
 func _on_settings_pressed():
-    AudioManager.play_sfx("res://assets/audio/click.wav")
     GameManager.go_to_scene("res://scenes/settings.tscn")
