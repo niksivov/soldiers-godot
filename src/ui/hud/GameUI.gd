@@ -36,14 +36,18 @@ func _build_reserve_ui(reserves: Array):
 
     for entry in reserves:
         var cfg = entry.soldier_config
+        if not cfg:
+            continue
+
         var container = HBoxContainer.new()
         container.size_flags_horizontal = SIZE_EXPAND
 
         var icon = TextureRect.new()
         icon.custom_minimum_size = Vector2(36, 36)
         icon.expand_mode = TextureRect.EXPAND_FIT_WIDTH_PROPORTIONAL
-        if cfg.icon:
-            icon.texture = cfg.icon
+        var icon_tex = cfg.icon if cfg.icon else _load_soldier_sprite(cfg.id)
+        if icon_tex:
+            icon.texture = icon_tex
         container.add_child(icon)
 
         var label = Label.new()
@@ -61,6 +65,15 @@ func _build_reserve_ui(reserves: Array):
         _soldier_buttons.append(container)
 
     interaction.set_reserve(reserves)
+
+
+func _load_soldier_sprite(soldier_id: String) -> Texture2D:
+    var soldier_ids = ["rifleman", "machinegunner", "sniper", "laser", "grenadier", "rocket"]
+    var idx = soldier_ids.find(soldier_id) + 1
+    if idx == 0:
+        return null
+    var path = "res://assets Nikita/soldiers/soldier_%02d_idle.png" % idx
+    return load(path) as Texture2D
 
 
 func _on_reserve_clicked(cfg: SoldierConfig):
