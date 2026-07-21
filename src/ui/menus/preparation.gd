@@ -4,9 +4,7 @@ var level_config: LevelConfig
 
 
 func _ready():
-    var bg = Sprite2D.new()
-    bg.texture = load("res://assets Nikita/backgrounds/bg_menu.png")
-    add_child(bg)
+    _add_background("res://assets Nikita/backgrounds/bg_menu.png")
 
     level_config = preload("res://assets/configs/level_01.tres")
 
@@ -34,17 +32,28 @@ func _ready():
         add_child(el)
         idx += 1
 
-    var play_btn = _make_button(load("res://assets Nikita/buttons/button_play.png"), Vector2(640, 550))
-    play_btn.pressed.connect(_on_play_pressed)
-    add_child(play_btn)
+    _add_button("res://assets Nikita/buttons/button_play.png", Vector2(640, 550), _on_play_pressed)
 
 
-func _make_button(texture: Texture2D, pos: Vector2) -> TextureButton:
-    var btn = TextureButton.new()
-    btn.texture_normal = texture
-    btn.position = pos - texture.get_size() * 0.5
-    return btn
+func _add_background(path: String):
+    if ResourceLoader.exists(path):
+        var bg = Sprite2D.new()
+        bg.texture = load(path)
+        bg.position = Vector2(640, 360)
+        bg.scale = Vector2(1280.0 / bg.texture.get_width(), 720.0 / bg.texture.get_height())
+        add_child(bg)
+
+
+func _add_button(path: String, pos: Vector2, callback: Callable):
+    if ResourceLoader.exists(path):
+        var tex = load(path) as Texture2D
+        var btn = TextureButton.new()
+        btn.texture_normal = tex
+        btn.position = pos - tex.get_size() * 0.5
+        btn.pressed.connect(callback)
+        add_child(btn)
 
 
 func _on_play_pressed():
+    AudioManager.play_sfx("res://assets/audio/click.wav")
     GameManager.go_to_scene("res://scenes/game.tscn")

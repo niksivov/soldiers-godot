@@ -18,7 +18,11 @@ interaction = NodePath("GameInteraction")
 ui_layer = NodePath("UILayer")
 game_ui = NodePath("UILayer/GameUI")
 
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(640, 360)
+
 [node name="Field" type="Node2D" parent="."]
+position = Vector2(89, 24)
 script = ExtResource("2")
 
 [node name="EggSpawner" type="Node" parent="."]
@@ -37,7 +41,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource("7")
 
-[node name="UILayer" type="CanvasLayer" parent=".""]
+[node name="UILayer" type="CanvasLayer" parent="."]
 
 [node name="GameUI" type="Control" parent="UILayer"]
 mouse_filter = 1

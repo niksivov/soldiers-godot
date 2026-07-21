@@ -1,6 +1,6 @@
 extends Node2D
 
-const CELL_SIZE: int = 72
+const CELL_SIZE: int = 56
 const GRID_SIZE: int = 10
 
 enum Side { TOP, BOTTOM, LEFT, RIGHT }

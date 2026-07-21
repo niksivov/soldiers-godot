@@ -1,22 +1,19 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
 config_version=5
 
 [application]
 
 config/name="Soldiers vs Aliens"
 run/main_scene="res://scenes/main_menu.tscn"
+config/features=PackedStringArray("4.7")
 config/icon="res://assets Nikita/logo/logo.png"
-
-[display]
-
-window/size/viewport_width=1280
-window/size/viewport_height=720
-window/stretch/mode="canvas_items"
-window/stretch/aspect="keep"
-window/dpi/allow_hidpi=true
-
-[rendering]
-
-textures/vram_compression/import_s3tc=true
 
 [autoload]
 
@@ -28,6 +25,16 @@ SaveManager="*res://src/autoload/SaveManager.gd"
 Monetization="*res://src/autoload/Monetization.gd"
 YandexSDK="*res://src/autoload/YandexSDK.gd"
 
+[display]
+
+window/size/viewport_width=1280
+window/size/viewport_height=720
+window/stretch/mode="canvas_items"
+
 [dotnet]
 
 enabled=false
+
+[rendering]
+
+textures/vram_compression/import_s3tc=true
