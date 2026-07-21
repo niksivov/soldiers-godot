@@ -34,6 +34,15 @@ Reference existing sprites from `assets Nikita/` folder to match style, then des
 ## Approval
 Generate on the fly without asking. Later redo specific assets if needed.
 
+## Yandex Games requirements (target platform)
+- **SDK mandatory** — Yandex Games SDK must be integrated (moderation will reject without it)
+- **LoadingAPI.ready()** — call when the game is fully loaded and playable
+- **Auto language** — use `ysdk.environment.i18n.lang` for UI language, never manual selection
+- **Pause/Resume** — listen to `ysdk.on('game_api_pause')` / `ysdk.on('game_api_resume')`; pause game loop accordingly
+- **Payments** — only through Yandex Games SDK
+- **No external logins/links** — users must not need third-party auth
+- **Export format** — HTML5 (WebGL), Godot HTML5 export template
+
 ## Missing categories (known gaps)
 - Enemy/alien sprites (walk, attack, death animations)
 - Soldier attack/shoot animations (only idle exists)

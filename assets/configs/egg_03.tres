@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script="res://src/configs/EggConfig.gd" format=3]
+
+[resource]
+id = "egg_03"
+display_name = "Яйцо-3"
+hp = 120
+reward_coins = 25

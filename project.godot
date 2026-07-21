@@ -1,0 +1,33 @@
+config_version=5
+
+[application]
+
+config/name="Soldiers vs Aliens"
+run/main_scene="res://scenes/main_menu.tscn"
+config/icon="res://assets Nikita/logo/logo.png"
+
+[display]
+
+window/size/viewport_width=1280
+window/size/viewport_height=720
+window/stretch/mode="canvas_items"
+window/stretch/aspect="keep"
+window/dpi/allow_hidpi=true
+
+[rendering]
+
+textures/vram_compression/import_s3tc=true
+
+[autoload]
+
+GameManager="*res://src/autoload/GameManager.gd"
+EconomyManager="*res://src/autoload/EconomyManager.gd"
+LevelManager="*res://src/autoload/LevelManager.gd"
+AudioManager="*res://src/autoload/AudioManager.gd"
+SaveManager="*res://src/autoload/SaveManager.gd"
+Monetization="*res://src/autoload/Monetization.gd"
+YandexSDK="*res://src/autoload/YandexSDK.gd"
+
+[dotnet]
+
+enabled=false

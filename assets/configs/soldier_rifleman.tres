@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script="res://src/configs/SoldierConfig.gd" format=3]
+
+[resource]
+id = "rifleman"
+display_name = "Автоматчик"
+cost = 100
+damage = 20
+reload_time = 0.8
+range = 5
+fire_type = "bullet"
+upgrade_cost = 200
+reserve_count = 8

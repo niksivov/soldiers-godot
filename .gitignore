@@ -9,6 +9,9 @@ export/
 import/
 *.import
 
+# Godot binary copy
+godot.exe/
+
 # OS
 Thumbs.db
 .DS_Store
