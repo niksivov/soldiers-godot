@@ -16,14 +16,24 @@ signal victory()
 signal defeat()
 signal time_updated(time_left: float)
 
-const LEVEL_PATH: String = "res://assets/configs/level_01.tres"
 const RESULT_PATH: String = "res://scenes/result.tscn"
+const LEVEL_PATHS: Dictionary = {
+	"level_01": "res://assets/configs/level_01.tres",
+	"level_02": "res://assets/configs/level_02.tres",
+	"level_03": "res://assets/configs/level_03.tres"
+}
 
 
 func _ready():
     process_mode = Node.PROCESS_MODE_ALWAYS
 
-    current_level = load(LEVEL_PATH)
+    var level_id = GameManager.last_result.get("next_level", "level_01")
+    var path = LEVEL_PATHS.get(level_id, "res://assets/configs/level_01.tres")
+    if ResourceLoader.exists(path):
+        current_level = load(path)
+    else:
+        current_level = load("res://assets/configs/level_01.tres")
+
     if current_level:
         _start_level()
 
@@ -75,8 +85,14 @@ func _on_victory():
     is_game_over = true
     EconomyManager.add_crystals(current_level.crystal_reward)
     LevelManager.complete_level(true)
+
+    var level_num = current_level.id.trim_prefix("level_").to_int()
+    var unlocked = SaveManager.data.get("unlocked_levels", 1)
+    if level_num >= unlocked:
+        SaveManager.save_player_data("unlocked_levels", level_num + 1)
     SaveManager.mark_dirty()
-    GameManager.go_to_scene_with_data(RESULT_PATH, { "victory": true })
+
+    GameManager.go_to_scene_with_data(RESULT_PATH, { "victory": true, "next_level": current_level.id })
 
 
 func _on_defeat():

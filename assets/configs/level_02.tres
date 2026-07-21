@@ -1,0 +1,138 @@
+[gd_resource type="Resource" script="res://src/configs/LevelConfig.gd" format=3]
+
+[ext_resource type="Resource" path="res://assets/configs/soldier_rifleman.tres" id="1"]
+[ext_resource type="Resource" path="res://assets/configs/soldier_machinegunner.tres" id="2"]
+[ext_resource type="Resource" path="res://assets/configs/soldier_sniper.tres" id="3"]
+[ext_resource type="Resource" path="res://assets/configs/egg_01.tres" id="4"]
+[ext_resource type="Resource" path="res://assets/configs/egg_02.tres" id="5"]
+[ext_resource type="Resource" path="res://assets/configs/egg_03.tres" id="6"]
+[ext_resource type="Resource" path="res://assets/configs/egg_04.tres" id="7"]
+
+[sub_resource type="Resource" script="res://src/configs/StartingReserve.gd" id="sub_sr1"]
+soldier_config = ExtResource("1")
+count = 8
+
+[sub_resource type="Resource" script="res://src/configs/StartingReserve.gd" id="sub_sr2"]
+soldier_config = ExtResource("2")
+count = 4
+
+[sub_resource type="Resource" script="res://src/configs/StartingReserve.gd" id="sub_sr3"]
+soldier_config = ExtResource("3")
+count = 2
+
+[sub_resource type="Resource" script="res://src/configs/WaveEntry.gd" id="sub_w1"]
+time = 0.0
+egg_config = ExtResource("4")
+
+[sub_resource type="Resource" script="res://src/configs/WaveEntry.gd" id="sub_w2"]
+time = 0.0
+egg_config = ExtResource("4")
+
+[sub_resource type="Resource" script="res://src/configs/WaveEntry.gd" id="sub_w3"]
+time = 0.0
+egg_config = ExtResource("4")
+
+[sub_resource type="Resource" script="res://src/configs/WaveEntry.gd" id="sub_w4"]
+time = 5.0
+egg_config = ExtResource("4")
+
+[sub_resource type="Resource" script="res://src/configs/WaveEntry.gd" id="sub_w5"]
+time = 5.0
+egg_config = ExtResource("4")
+
+[sub_resource type="Resource" script="res://src/configs/WaveEntry.gd" id="sub_w6"]
+time = 10.0
+egg_config = ExtResource("5")
+
+[sub_resource type="Resource" script="res://src/configs/WaveEntry.gd" id="sub_w7"]
+time = 10.0
+egg_config = ExtResource("5")
+
+[sub_resource type="Resource" script="res://src/configs/WaveEntry.gd" id="sub_w8"]
+time = 15.0
+egg_config = ExtResource("4")
+
+[sub_resource type="Resource" script="res://src/configs/WaveEntry.gd" id="sub_w9"]
+time = 15.0
+egg_config = ExtResource("4")
+
+[sub_resource type="Resource" script="res://src/configs/WaveEntry.gd" id="sub_w10"]
+time = 20.0
+egg_config = ExtResource("5")
+
+[sub_resource type="Resource" script="res://src/configs/WaveEntry.gd" id="sub_w11"]
+time = 20.0
+egg_config = ExtResource("5")
+
+[sub_resource type="Resource" script="res://src/configs/WaveEntry.gd" id="sub_w12"]
+time = 25.0
+egg_config = ExtResource("6")
+
+[sub_resource type="Resource" script="res://src/configs/WaveEntry.gd" id="sub_w13"]
+time = 25.0
+egg_config = ExtResource("6")
+
+[sub_resource type="Resource" script="res://src/configs/WaveEntry.gd" id="sub_w14"]
+time = 30.0
+egg_config = ExtResource("5")
+
+[sub_resource type="Resource" script="res://src/configs/WaveEntry.gd" id="sub_w15"]
+time = 30.0
+egg_config = ExtResource("5")
+
+[sub_resource type="Resource" script="res://src/configs/WaveEntry.gd" id="sub_w16"]
+time = 30.0
+egg_config = ExtResource("5")
+
+[sub_resource type="Resource" script="res://src/configs/WaveEntry.gd" id="sub_w17"]
+time = 35.0
+egg_config = ExtResource("6")
+
+[sub_resource type="Resource" script="res://src/configs/WaveEntry.gd" id="sub_w18"]
+time = 35.0
+egg_config = ExtResource("7")
+
+[sub_resource type="Resource" script="res://src/configs/WaveEntry.gd" id="sub_w19"]
+time = 40.0
+egg_config = ExtResource("5")
+
+[sub_resource type="Resource" script="res://src/configs/WaveEntry.gd" id="sub_w20"]
+time = 40.0
+egg_config = ExtResource("5")
+
+[sub_resource type="Resource" script="res://src/configs/WaveEntry.gd" id="sub_w21"]
+time = 45.0
+egg_config = ExtResource("6")
+
+[sub_resource type="Resource" script="res://src/configs/WaveEntry.gd" id="sub_w22"]
+time = 45.0
+egg_config = ExtResource("6")
+
+[sub_resource type="Resource" script="res://src/configs/WaveEntry.gd" id="sub_w23"]
+time = 50.0
+egg_config = ExtResource("7")
+
+[sub_resource type="Resource" script="res://src/configs/WaveEntry.gd" id="sub_w24"]
+time = 50.0
+egg_config = ExtResource("7")
+
+[sub_resource type="Resource" script="res://src/configs/WaveEntry.gd" id="sub_w25"]
+time = 55.0
+egg_config = ExtResource("4")
+
+[sub_resource type="Resource" script="res://src/configs/WaveEntry.gd" id="sub_w26"]
+time = 55.0
+egg_config = ExtResource("4")
+
+[sub_resource type="Resource" script="res://src/configs/WaveEntry.gd" id="sub_w27"]
+time = 55.0
+egg_config = ExtResource("4")
+
+[resource]
+id = "level_02"
+display_name = "Натиск"
+time_limit = 60.0
+starting_coins = 600
+crystal_reward = 20
+starting_reserves = [SubResource("sub_sr1"), SubResource("sub_sr2"), SubResource("sub_sr3")]
+waves = [SubResource("sub_w1"), SubResource("sub_w2"), SubResource("sub_w3"), SubResource("sub_w4"), SubResource("sub_w5"), SubResource("sub_w6"), SubResource("sub_w7"), SubResource("sub_w8"), SubResource("sub_w9"), SubResource("sub_w10"), SubResource("sub_w11"), SubResource("sub_w12"), SubResource("sub_w13"), SubResource("sub_w14"), SubResource("sub_w15"), SubResource("sub_w16"), SubResource("sub_w17"), SubResource("sub_w18"), SubResource("sub_w19"), SubResource("sub_w20"), SubResource("sub_w21"), SubResource("sub_w22"), SubResource("sub_w23"), SubResource("sub_w24"), SubResource("sub_w25"), SubResource("sub_w26"), SubResource("sub_w27")]

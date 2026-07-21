@@ -60,7 +60,11 @@ func _add_button(path: String, pos: Vector2, callback: Callable):
 
 func _on_next_pressed():
     AudioManager.play_sfx("res://assets/audio/click.wav")
-    GameManager.go_to_scene("res://scenes/level_map.tscn")
+    var current = GameManager.last_result.get("next_level", "level_01")
+    var num = current.trim_prefix("level_").to_int()
+    var next = "level_%02d" % [num + 1]
+    GameManager.last_result["next_level"] = next
+    GameManager.go_to_scene("res://scenes/preparation.tscn")
 
 
 func _on_retry_pressed():
