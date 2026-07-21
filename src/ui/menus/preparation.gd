@@ -17,36 +17,50 @@ func _ready():
 	var path = LEVEL_PATHS.get(_level_id)
 	if path and ResourceLoader.exists(path):
 		level_config = load(path)
-	else:
-		level_config = preload("res://assets/configs/level_01.tres")
+	if not level_config:
+		level_config = load("res://assets/configs/level_01.tres")
 
 	GameManager.last_result["next_level"] = _level_id
 
-	var label = Label.new()
-	label.text = "Уровень %d: %s" % [_level_id.trim_prefix("level_").to_int(), level_config.display_name]
-	label.position = Vector2(500, 200)
-	label.scale = Vector2(2, 2)
-	add_child(label)
+	var level_num = 1
+	if _level_id.begins_with("level_"):
+		level_num = _level_id.trim_prefix("level_").to_int()
 
-	var info = Label.new()
-	info.text = "Время: %d сек\nСтартовые монеты: %d\nНаграда: %d кристаллов\n\nЯйца:" % [level_config.time_limit, level_config.starting_coins, level_config.crystal_reward]
-	info.position = Vector2(500, 280)
-	add_child(info)
+	var title = Label.new()
+	title.text = "Уровень %d: %s" % [level_num, level_config.display_name if level_config else "???"]
+	title.position = Vector2(480, 180)
+	title.scale = Vector2(2, 2)
+	add_child(title)
 
-	var egg_counts = {}
-	for w in level_config.waves:
-		var eid = w.egg_config.display_name
-		egg_counts[eid] = egg_counts.get(eid, 0) + 1
+	if level_config:
+		var info = Label.new()
+		info.text = "Время: %d сек\nСтартовые монеты: %d\nНаграда: %d кристаллов" % [
+			level_config.time_limit, level_config.starting_coins, level_config.crystal_reward
+		]
+		info.position = Vector2(480, 280)
+		add_child(info)
 
-	var idx = 0
-	for eid in egg_counts:
-		var el = Label.new()
-		el.text = "  %s x%d" % [eid, egg_counts[eid]]
-		el.position = Vector2(500, 420 + idx * 25)
-		add_child(el)
-		idx += 1
+		var egg_counts = {}
+		for w in level_config.waves:
+			if w and w.egg_config:
+				var eid = w.egg_config.display_name
+				egg_counts[eid] = egg_counts.get(eid, 0) + 1
 
-	_add_button("res://assets Nikita/buttons/button_play.png", Vector2(640, 550), _on_play_pressed)
+		if not egg_counts.is_empty():
+			var header = Label.new()
+			header.text = "Яйца:"
+			header.position = Vector2(480, 400)
+			add_child(header)
+
+			var idx = 0
+			for eid in egg_counts:
+				var el = Label.new()
+				el.text = "  %s x%d" % [eid, egg_counts[eid]]
+				el.position = Vector2(480, 430 + idx * 25)
+				add_child(el)
+				idx += 1
+
+	_add_button("res://assets Nikita/buttons/button_play.png", Vector2(640, 560), _on_play_pressed)
 
 
 func _add_background(path: String):
@@ -54,18 +68,21 @@ func _add_background(path: String):
 		var bg = Sprite2D.new()
 		bg.texture = load(path)
 		bg.position = Vector2(640, 360)
-		bg.scale = Vector2(1280.0 / bg.texture.get_width(), 720.0 / bg.texture.get_height())
+		var tex = load(path) as Texture2D
+		if tex:
+			bg.scale = Vector2(1280.0 / tex.get_width(), 720.0 / tex.get_height())
 		add_child(bg)
 
 
 func _add_button(path: String, pos: Vector2, callback: Callable):
 	if ResourceLoader.exists(path):
 		var tex = load(path) as Texture2D
-		var btn = TextureButton.new()
-		btn.texture_normal = tex
-		btn.position = pos - tex.get_size() * 0.5
-		btn.pressed.connect(callback)
-		add_child(btn)
+		if tex:
+			var btn = TextureButton.new()
+			btn.texture_normal = tex
+			btn.position = pos - tex.get_size() * 0.5
+			btn.pressed.connect(callback)
+			add_child(btn)
 
 
 func _on_play_pressed():
