@@ -1,0 +1,14 @@
+# Godot exports
+export/
+*.exe
+*.zip
+*.dmg
+
+# Godot editor
+.godot/
+import/
+*.import
+
+# OS
+Thumbs.db
+.DS_Store
