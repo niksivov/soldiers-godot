@@ -32,8 +32,9 @@ func play_music(path: String):
     if _current_music == path and _music_player.playing:
         return
     _current_music = path
-    if ResourceLoader.exists(path):
-        _music_player.stream = load(path)
+    var stream = load(path)
+    if stream is AudioStream:
+        _music_player.stream = stream
         _music_player.volume_db = linear_to_db(music_volume)
         _music_player.play()
 

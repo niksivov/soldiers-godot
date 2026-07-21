@@ -14,8 +14,10 @@ func _ready():
 	label.scale = Vector2(2, 2)
 	add_child(label)
 
-	var num_label = Label.new()
 	var level_id = GameManager.last_result.get("next_level", "level_01")
+	GameManager.last_result["next_level"] = level_id
+
+	var num_label = Label.new()
 	num_label.text = "Уровень: " + level_id
 	num_label.position = Vector2(400, 280)
 	add_child(num_label)

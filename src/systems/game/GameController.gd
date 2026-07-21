@@ -43,7 +43,10 @@ func _setup_background():
     var bg = get_node_or_null("Background") as Sprite2D
     if bg and bg.texture:
         var tex = bg.texture
-        bg.scale = Vector2(1280.0 / tex.get_width(), 720.0 / tex.get_height())
+        var tw = tex.get_width()
+        var th = tex.get_height()
+        if tw > 0 and th > 0:
+            bg.scale = Vector2(1280.0 / tw, 720.0 / th)
 
 
 func _start_level():
