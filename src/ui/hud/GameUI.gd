@@ -46,8 +46,7 @@ func _build_reserve_ui(reserves: Array):
         icon.custom_minimum_size = Vector2(36, 36)
         icon.expand_mode = TextureRect.EXPAND_FIT_WIDTH_PROPORTIONAL
         var icon_tex = cfg.icon if cfg.icon else _load_soldier_sprite(cfg.id)
-        if icon_tex:
-            icon.texture = icon_tex
+        icon.texture = icon_tex
         container.add_child(icon)
 
         var label = Label.new()
@@ -59,6 +58,7 @@ func _build_reserve_ui(reserves: Array):
         btn.flat = true
         btn.size_flags_horizontal = SIZE_EXPAND
         btn.pressed.connect(_on_reserve_clicked.bind(cfg))
+        btn.text = "Купить"
         container.add_child(btn)
 
         reserve_panel.add_child(container)
