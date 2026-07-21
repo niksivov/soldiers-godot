@@ -59,4 +59,4 @@ func _load_level(level_id: String) -> LevelConfig:
 
 
 func _on_play_pressed():
-    GameManager.go_to_scene("res://scenes/game.tscn")
+	GameManager.go_to_scene("res://scenes/game.tscn")

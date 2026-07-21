@@ -1,11 +1,6 @@
 extends Node2D
 
 const LEVEL_IDS: Array = ["level_01", "level_02", "level_03"]
-const LEVEL_PATHS: Dictionary = {
-	"level_01": "res://assets/configs/level_01.tres",
-	"level_02": "res://assets/configs/level_02.tres",
-	"level_03": "res://assets/configs/level_03.tres"
-}
 
 
 func _ready():
@@ -31,17 +26,16 @@ func _draw_levels():
 		var is_unlocked = (i + 1) <= unlocked
 		var is_current = (i + 1) == unlocked
 
-		var tex_path = "res://assets Nikita/levels/level_current.png"
+		var tex_path = "res://assets Nikita/levels/level_locked.png"
 		if is_current:
 			tex_path = "res://assets Nikita/levels/level_current.png"
 		elif is_unlocked:
 			tex_path = "res://assets Nikita/levels/level_unlocked.png"
-		else:
-			tex_path = "res://assets Nikita/levels/level_locked.png"
 
-		if ResourceLoader.exists(tex_path):
+		var tex = load(tex_path)
+		if tex:
 			var btn = TextureButton.new()
-			btn.texture_normal = load(tex_path)
+			btn.texture_normal = tex
 			btn.position = pos
 			if is_unlocked:
 				btn.pressed.connect(_on_level_pressed.bind(level_id))
@@ -55,17 +49,17 @@ func _draw_levels():
 
 
 func _add_background(path: String):
-	if ResourceLoader.exists(path):
-		var bg = Sprite2D.new()
-		bg.texture = load(path)
+	var bg = Sprite2D.new()
+	bg.texture = load(path)
+	if bg.texture:
 		bg.position = Vector2(640, 360)
 		bg.scale = Vector2(1280.0 / bg.texture.get_width(), 720.0 / bg.texture.get_height())
 		add_child(bg)
 
 
 func _add_button(path: String, pos: Vector2, callback: Callable):
-	if ResourceLoader.exists(path):
-		var tex = load(path) as Texture2D
+	var tex = load(path) as Texture2D
+	if tex:
 		var btn = TextureButton.new()
 		btn.texture_normal = tex
 		btn.position = pos - tex.get_size() * 0.5
@@ -74,9 +68,9 @@ func _add_button(path: String, pos: Vector2, callback: Callable):
 
 
 func _on_back_pressed():
-    GameManager.go_to_scene("res://scenes/main_menu.tscn")
+	GameManager.go_to_scene("res://scenes/main_menu.tscn")
 
 
 func _on_level_pressed(level_id: String):
-    GameManager.last_result["next_level"] = level_id
-    GameManager.go_to_scene("res://scenes/preparation.tscn")
+	GameManager.last_result["next_level"] = level_id
+	GameManager.go_to_scene("res://scenes/preparation.tscn")
