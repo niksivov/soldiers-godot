@@ -10,7 +10,7 @@ const LEVEL_PATHS: Dictionary = {
 
 func _ready():
 	_add_background("res://assets Nikita/backgrounds/bg_levels.png")
-    _add_button("res://assets Nikita/buttons/button_back.png", Vector2(640, 650), _on_back_pressed)
+	_add_button("res://assets Nikita/buttons/button_back.png", Vector2(640, 650), _on_back_pressed)
 	_draw_levels()
 
 
