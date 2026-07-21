@@ -26,6 +26,7 @@ const LEVEL_PATHS: Dictionary = {
 
 func _ready():
     process_mode = Node.PROCESS_MODE_ALWAYS
+    _setup_background()
 
     var level_id = GameManager.last_result.get("next_level", "level_01")
     var path = LEVEL_PATHS.get(level_id, "res://assets/configs/level_01.tres")
@@ -36,6 +37,13 @@ func _ready():
 
     if current_level:
         _start_level()
+
+
+func _setup_background():
+    var bg = get_node_or_null("Background") as Sprite2D
+    if bg and bg.texture:
+        var tex = bg.texture
+        bg.scale = Vector2(1280.0 / tex.get_width(), 720.0 / tex.get_height())
 
 
 func _start_level():
