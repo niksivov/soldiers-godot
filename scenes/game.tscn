@@ -10,14 +10,8 @@
 [ext_resource type="Script" path="res://src/ui/hud/GameUI.gd" id="8"]
 [ext_resource type="Texture2D" path="res://assets Nikita/backgrounds/bg_game.png" id="9"]
 
-[node name="Game" type="Node2D"]
+[node name="Game" type="Node"]
 script = ExtResource("1")
-field = NodePath("Field")
-spawner = NodePath("EggSpawner")
-combat_system = NodePath("CombatSystem")
-interaction = NodePath("GameInteraction")
-ui_layer = NodePath("UILayer")
-game_ui = NodePath("UILayer/GameUI")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(640, 360)

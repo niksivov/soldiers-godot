@@ -53,9 +53,7 @@ func _ready():
 
 func _load_level(level_id: String) -> LevelConfig:
 	var path = "res://assets/configs/%s.tres" % level_id
-	if ResourceLoader.exists(path):
-		return load(path)
-	return null
+	return load(path)
 
 
 func _on_play_pressed():
